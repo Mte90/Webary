@@ -1,0 +1,18 @@
+{
+    "author": "Mte90",
+    "site": "http://www.mte90.net",
+    "version": "1.0",
+    "description": "Glossario Web",
+    "glossary": [
+        {
+        "term": "Browser",
+        "definition": "Il programma per navigare su internet",
+        "category": "programmi"
+        },
+        {
+        "term": "Client",
+        "definition": "Quel programma che è eseguito sul proprio pc e permette di interfacciarsi con qualcosa di esterno",
+        "category": "programmi"
+        }
+    ]
+} 
