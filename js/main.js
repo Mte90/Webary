@@ -23,7 +23,7 @@ $(function(){
 						check2[firstLetter] = 1;
 					}
 
-					items.push('<li id="' + val.term + '" class="'+val.category+' '+ firstLetter +' all"><h4>' + val.term + ':</h4><pre>' + val.definition + '</pre></li>');
+					items.push('<li id="' + val.term + '" class="'+val.category+' '+ firstLetter +' all"><h4>' + val.term + ':</h4><blockquote>' + val.definition + '</blockquote></li>');
 				});
 				$('<ul/>', {'class': 'list',html: items.sort().join('')}).prependTo('.list-glossary');
 				
@@ -84,8 +84,8 @@ $(function(){
 			if(filter) {
 			// this finds all links in a list that contain the input,
 			// and hide the ones not containing the input while showing the ones that do
-				$(list).find("h4:not(:Contains(" + filter + "))").parent().slideUp();
-				$(list).find("h4:Contains(" + filter + ")").parent().slideDown();
+				$(list).find("h4:not(:containsi(" + filter + "))").parent().slideUp();
+				$(list).find("h4:containsi(" + filter + ")").parent().slideDown();
 			} else {
 				$(list).find("li").slideDown();
 			}
@@ -94,7 +94,14 @@ $(function(){
         // fire the above change event after every letter
 			$(this).change();
 		});
-  }
+	}
+
+	//Contain selecotr of jquery is case-sensitive with this function have a selector case-insensitive
+	//http://stackoverflow.com/questions/187537/is-there-a-case-insensitive-jquery-contains-selector
+	$.extend($.expr[':'], {'containsi': function(elem, i, match, array){
+		return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+		}
+	});
 
   loadJson('ita');
   listFilter($(".list-glossary"));
