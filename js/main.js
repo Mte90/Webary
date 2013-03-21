@@ -16,6 +16,7 @@ $(function(){
 			$('.modal-body').prepend("Choose the file:");
 		});
 	}
+	
 	function loadJson(file){
 	//load glossary
 		var path = 'glossary/'+ file;
