@@ -1,23 +1,25 @@
 $(function(){
-	$.getJSON('list.php',function(data){
-		var ul = $('<ul>').addClass('list-file');
-		var json = data;
-		$(json).each(function(index) {
-			text = json[index].replace(/\.json/, '').split('_');
-			flag = $('<div>').addClass('flag flag-'+text[0].toLowerCase());
-			ul.append(
-				$('<li>').text(text[1].replace(/-/g,' ')).prepend(flag).addClass('selectable').data('id',json[index])
-			);
+
+	function loadGlossaryModal() {
+		$.getJSON('list.php',function(data){
+			var ul = $('<ul>').addClass('list-file');
+			var json = data;
+			$(json).each(function(index) {
+				text = json[index].replace(/\.json/, '').split('_');
+				flag = $('<div>').addClass('flag flag-'+text[0].toLowerCase());
+				ul.append(
+					$('<li>').text(text[1].replace(/-/g,' ')).prepend(flag).addClass('selectable').data('id',json[index])
+				);
+			});
+
+			bootbox.dialog(ul);
+			$('.modal-body').prepend("Choose the file:");
 		});
-		
-		bootbox.dialog(ul);
-		$('.modal-body').prepend("Choose the file:");
-	});
-	
+	}
 	function loadJson(file){
 	//load glossary
 		var path = 'glossary/'+ file;
-		
+		reset();
 		$.getJSON(path,function(data){
 				var items = [];
 				categories = [];
@@ -74,6 +76,15 @@ $(function(){
 		$('<ul/>', {'class': 'letter inline',html: lists.join('')}).appendTo('.list-chars');
 	}
 
+	function reset() {
+		$('.author').text('').attr('href','#');
+		$('.description').text('');
+		$('.version').text('');
+		$('.list-chars').children().remove();
+		$('.menu-span').children().remove();
+		$('.list-glossary').children().remove();
+	}
+
 	$(document).on('click','.menu-category',function(){
 		//filter by category
 		$('.list-char').css('font-weight','normal');
@@ -91,8 +102,13 @@ $(function(){
 	});
 
 	$(document).on('click','.selectable',function(){
+		//on click of the list load the json
 		loadJson($(this).data('id'));
 		bootbox.hideAll()
+	});
+
+	$(document).on('click','.open',function(){
+		loadGlossaryModal();
 	});
 	
 	function listFilter(list) { 
@@ -123,4 +139,5 @@ $(function(){
 	});
 
   listFilter($(".list-glossary"));
+  loadGlossaryModal();
 });
