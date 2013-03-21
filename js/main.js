@@ -1,13 +1,14 @@
 $(function(){
 	$.getJSON('list.php',function(data){
-		var ul = $('<ul>');
+		var ul = $('<ul>').addClass('list-file');
 		var json = data;
 		$(json).each(function(index) {
 			ul.append(
 				$('<li>').text(json[index].replace(/\.json/, '')).addClass('selectable').data('id',json[index])
 			);
 		});
-		bootbox.alert(ul);
+		ul.prepend("Choose the file:");
+		bootbox.dialog(ul);
 	});
 	
 	function loadJson(file){
@@ -88,6 +89,7 @@ $(function(){
 
 	$(document).on('click','.selectable',function(){
 		loadJson($(this).data('id'));
+		bootbox.hideAll()
 	});
 	
 	function listFilter(list) { 
