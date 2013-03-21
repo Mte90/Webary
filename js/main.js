@@ -1,8 +1,18 @@
 $(function(){
-
+	$.getJSON('list.php',function(data){
+		var ul = $('<ul>');
+		var json = data;
+		$(json).each(function(index) {
+			ul.append(
+				$('<li>').text(json[index].replace(/\.json/, '')).addClass('selectable').data('id',json[index])
+			);
+		});
+		bootbox.alert(ul);
+	});
+	
 	function loadJson(file){
 	//load glossary
-		var path = 'glossary/'+ file +'.json';
+		var path = 'glossary/'+ file;
 		
 		$.getJSON(path,function(data){
 				var items = [];
@@ -57,7 +67,7 @@ $(function(){
 			lists.push('<li class="list-child"><b><a class="list-char" data-type="'+val+'" href="#'+val+'">' + val +'</a></b></li>');
 		});
 
-		$('<ul/>', {'class': 'letter',html: lists.join('')}).appendTo('.list-chars');
+		$('<ul/>', {'class': 'letter inline',html: lists.join('')}).appendTo('.list-chars');
 	}
 
 	$(document).on('click','.menu-category',function(){
@@ -74,6 +84,10 @@ $(function(){
 		$('.list-char').css('font-weight','normal');
 		$(this).css('font-weight','bold');
 		$('.list li').slideDown().not('.'+$(this).data('type')).slideUp();
+	});
+
+	$(document).on('click','.selectable',function(){
+		loadJson($(this).data('id'));
 	});
 	
 	function listFilter(list) { 
@@ -103,6 +117,5 @@ $(function(){
 		}
 	});
 
-  loadJson('ita');
   listFilter($(".list-glossary"));
 });

@@ -29,15 +29,11 @@ li {
 	text-transform: capitalize;
 }
 
+.selectable {
+	cursor:pointer;
+}
 
-
-
-
-
-
-
-
-
-
-
-
+.selectable:hover {
+	background-color:#adadad;
+	color:white;
+}
