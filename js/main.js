@@ -9,8 +9,9 @@ $(function(){
 				$('<li>').text(text[1].replace(/-/g,' ')).prepend(flag).addClass('selectable').data('id',json[index])
 			);
 		});
-		ul.prepend("Choose the file:");
+		
 		bootbox.dialog(ul);
+		$('.modal-body').prepend("Choose the file:");
 	});
 	
 	function loadJson(file){
