@@ -1,7 +1,10 @@
 .flag {
 	width: 16px;
 	height: 11px;
-	background:url(../img/flags.png) no-repeat
+	background:url(../img/flags.png) no-repeat;
+	margin-right: 4px;
+    margin-top: 4px;
+	float:left
 }
 
 .flag.flag-ad {background-position: -16px 0}

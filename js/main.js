@@ -3,8 +3,10 @@ $(function(){
 		var ul = $('<ul>').addClass('list-file');
 		var json = data;
 		$(json).each(function(index) {
+			text = json[index].replace(/\.json/, '').split('_');
+			flag = $('<div>').addClass('flag flag-'+text[0].toLowerCase());
 			ul.append(
-				$('<li>').text(json[index].replace(/\.json/, '')).addClass('selectable').data('id',json[index])
+				$('<li>').text(text[1].replace(/-/g,' ')).prepend(flag).addClass('selectable').data('id',json[index])
 			);
 		});
 		ul.prepend("Choose the file:");
