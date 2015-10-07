@@ -1,5 +1,5 @@
 #Webary
-It's a simple interface for navigate and search on a glossary or dictionary.  
+It's a simple interface experiment for navigate and search on a glossary or dictionary.  
 Use BootStrap and PHP for list the file on server.  
 
 ##Features
@@ -7,6 +7,3 @@ Use BootStrap and PHP for list the file on server.
 * Search based on title
 * Categorizable 
 * Index by first letter of the term
-
-#Roadmap
-* Editor
